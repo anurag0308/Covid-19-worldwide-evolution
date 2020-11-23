@@ -2,6 +2,8 @@
 import os
 import numpy as np
 import pandas as pd
+import flask
+import io
 
 # Logging information
 import logging
@@ -13,6 +15,7 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 
+
 # Custom function
 import scripts.utils_covid as f
 
@@ -21,6 +24,7 @@ world = f.load_pickle('world_info.p')
 
 # Deployment inforamtion
 PORT = 8050
+
 
 ############################################################################################
 ########################################## APP #############################################
@@ -36,6 +40,28 @@ server = app.server
 app.title = 'COVID 19 - World cases'
 app.config.suppress_callback_exceptions = True
 
+css_directory = os.getcwd()
+stylesheets = ['styles.css']
+static_css_route = '/static/'
+
+
+@app.server.route('{}<styles>'.format(static_css_route))
+def serve_stylesheet(styles):
+    if styles not in stylesheets:
+        raise Exception(
+            '"{}" is excluded from the allowed static files'.format(
+                styles
+            )
+        )
+    return flask.send_from_directory(css_directory, styles)
+
+for styles in stylesheets:
+    app.css.append_css({"external_url": "/static/{}".format(styles)})
+
+
+def b64_image(image_filename): 
+    with open(image_filename, 'rb') as f: image = f.read() 
+    return 'data:image/png;base64,' + base64.b64encode(image).decode('utf-8')
 ############################################################################################
 ######################################### LAYOUT ###########################################
 ############################################################################################
@@ -47,14 +73,14 @@ links = html.Div(
         html.A(
             href='https://www.linkedin.com/in/anurag-sharma-0308/',
             children=[
-                html.Img(src=app.get_asset_url('linkedin.png'), width=20, height=20),
-                html.Span("Map")
+                html.Img(src=b64_image('linkedin.png'), width=20, height=20),
+                html.Span("Connect")
             ]
         ),
         html.A(
             href='https://github.com/anurag0308',
             children=[
-                html.Img(src=app.get_asset_url('github.png'), width=20, height=20),
+                html.Img(src=b64_image('github.png'),width=20, height=20),
                 # "Application code"
                 html.Span("Code")
             ]
@@ -62,7 +88,7 @@ links = html.Div(
         html.A(
             href='https://public.opendatasoft.com/explore/dataset/covid-19-pandemic-worldwide-data/information/?disjunctive.zone&disjunctive.category&sort=date',
             children=[
-                html.Img(src=app.get_asset_url('database.png'), width=20, height=20),
+                html.Img(src=b64_image('linkedin.png'),width=20, height=20),
                 # "Original COVID dataset"
                 html.Span("Data")
             ],
