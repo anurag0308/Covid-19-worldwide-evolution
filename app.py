@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import flask
 import io
+import base64
 
 # Logging information
 import logging
