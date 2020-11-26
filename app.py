@@ -89,7 +89,7 @@ links = html.Div(
         html.A(
             href='https://public.opendatasoft.com/explore/dataset/covid-19-pandemic-worldwide-data/information/?disjunctive.zone&disjunctive.category&sort=date',
             children=[
-                html.Img(src=b64_image('linkedin.png'),width=20, height=20),
+                html.Img(src=b64_image('database.png'),width=20, height=20),
                 # "Original COVID dataset"
                 html.Span("Data")
             ],
