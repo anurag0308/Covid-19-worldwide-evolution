@@ -7,7 +7,7 @@ import plotly.express as px
 import utils_covid as f
 pd.set_option('chained_assignment', None)
 
-def process_pandemic_data(df, startdate = '2020-03-01'):
+def process_pandemic_data(df, startdate = '2020-01-01'):
 
     # Columns renaming
     df.columns = [col.lower() for col in df.columns]
@@ -136,8 +136,19 @@ def create_world_fig(df, mapbox_access_token):
                     'mode':'immediate',
                 }
             ]
-        }]
-    }],
+        },
+            {
+                "label": "Pause",
+                "method": "animate",
+                "args": [[None], 
+                         {
+                             "frame": {"duration": 0, "redraw": False},
+                             "mode": "immediate",
+                             "fromcurrent":True,
+                             "transition": {"duration": 0}}
+                        ],
+            }]
+        }],
         sliders=sliders,
         margin={"r":0,"t":0,"l":0,"b":0}
     )
