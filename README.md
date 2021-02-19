@@ -11,7 +11,6 @@ Dash 🚀 with animated scatter map on mapbox/plotly (COVID data) for tracking d
 * [Screenshots](#screenshots)
 * [Technologies](#technologies)
 * [Features](#features)
-* [Status](#status)
 * [Contact](#contact)
 
 ## General info
@@ -30,10 +29,7 @@ Add more general information about project. What the purpose of the project is? 
 List of features ready and TODOs for future development
 * Confirmed🚨 , Recovered🏡 And Death⚰️ counts of Covid-19 cases all over the wolrd.
 * KPIs for a particular country available on hovering over that country.  
-* Visualize spread and containment over all the world througout the year with 🎬 buttons and slider to go to a particular date 📅.  
-
-## Status
-Project is: _in progress_ to deploy on heroku in a docker container 
+* Visualize spread and containment over all the world througout the year with 🎬 buttons and slider to go to a particular date 📅.   
 
 ## Contact
 Created by [@Anurag Sharma](https://www.linkedin.com/in/anurag-sharma-0308/) - feel free to contact me!
